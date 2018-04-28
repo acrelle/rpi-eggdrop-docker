@@ -1,7 +1,9 @@
 FROM alpine:3.7
-MAINTAINER Geo Van O <geo@eggheads.org>
+LABEL maintainer="anthony@relle.co.uk"
 
-RUN adduser -S eggdrop
+ARG UID=1001
+
+RUN adduser -S -u $UID doceggdrop
 
 # grab su-exec for easy step-down from root
 RUN apk add --no-cache 'su-exec>=0.2'
@@ -37,5 +39,6 @@ EXPOSE 3333
 COPY entrypoint.sh /home/eggdrop/eggdrop
 COPY docker.tcl /home/eggdrop/eggdrop/scripts/
 
+VOLUME ["/home/eggdrop/eggdrop/data"]
 ENTRYPOINT ["/home/eggdrop/eggdrop/entrypoint.sh"]
 CMD ["eggdrop.conf"]
