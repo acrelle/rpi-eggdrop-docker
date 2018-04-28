@@ -3,7 +3,7 @@ LABEL maintainer="anthony@relle.co.uk"
 
 ARG UID=1001
 
-RUN adduser -S -u $UID doceggdrop
+RUN adduser -S -u $UID eggdrop
 
 # grab su-exec for easy step-down from root
 RUN apk add --no-cache 'su-exec>=0.2'
@@ -11,10 +11,11 @@ RUN apk add --no-cache 'su-exec>=0.2'
 RUN apk add --no-cache tcl bash openssl
 RUN apk add --no-cache --virtual egg-deps tcl-dev wget ca-certificates make tar gpgme build-base openssl-dev \
   && wget ftp://ftp.eggheads.org/pub/eggdrop/source/1.8/eggdrop-1.8.3.tar.gz \
-  && wget ftp://ftp.eggheads.org/pub/eggdrop/source/1.8/eggdrop-1.8.3.tar.gz.asc \
-  && gpg --keyserver ha.pool.sks-keyservers.net --recv-key E01C240484DE7DBE190FE141E7667DE1D1A39AFF \
-  && gpg --batch --verify eggdrop-1.8.3.tar.gz.asc eggdrop-1.8.3.tar.gz \
-  && rm eggdrop-1.8.3.tar.gz.asc \
+  # Removed after "gpg: keyserver receive failed: Address not available"
+  # && wget ftp://ftp.eggheads.org/pub/eggdrop/source/1.8/eggdrop-1.8.3.tar.gz.asc \
+  # && gpg --keyserver ha.pool.sks-keyservers.net --recv-key E01C240484DE7DBE190FE141E7667DE1D1A39AFF \
+  # && gpg --batch --verify eggdrop-1.8.3.tar.gz.asc eggdrop-1.8.3.tar.gz \
+  # && rm eggdrop-1.8.3.tar.gz.asc \
   && tar -zxvf eggdrop-1.8.3.tar.gz \
   && rm eggdrop-1.8.3.tar.gz \
   && ( cd eggdrop-1.8.3 \
