@@ -34,7 +34,7 @@ services:
     build: .
     image: acrelle/rpi-eggdrop
     container_name: eggdrop
-    restart: always
+    restart: unless-stopped
     volumes:
      - ~/appdata/eggdrop/eggdrop_data:/home/eggdrop/eggdrop/data
      - ~/appdata/eggdrop/eggdrop_scripts:/home/eggdrop/eggdrop/scripts
