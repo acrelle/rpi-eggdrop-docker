@@ -1,7 +1,7 @@
 FROM alpine:3.7
 LABEL maintainer="anthony@relle.co.uk"
 
-ARG UID=1001
+ARG UID=1000
 
 RUN adduser -S -u $UID eggdrop
 
